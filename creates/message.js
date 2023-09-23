@@ -1,4 +1,4 @@
-const { refreshToken, sanitizeUrl } = require('../util');
+const { refreshToken, sanitizeUrl, uuidv4 } = require('../util');
 // create a particular message by name
 const perform = async (z, bundle) => {
   const auth = await refreshToken(z, bundle);
@@ -21,7 +21,7 @@ const perform = async (z, bundle) => {
   // this should return a single object
   let data = response.data;
   if (data.success) {
-    return { message: bundle.inputData.message }
+    return { message: bundle.inputData.message, id: uuidv4() }
   }
   throw new z.errors.Error(
       // This message is surfaced to the user
@@ -61,7 +61,8 @@ module.exports = {
       headers: {
         "Content-Type": "application/json",
         "Host": "localhost:4444"
-      }
+      },
+      id: '486ca60b-8c2c-411e-b54e-67c74a4fb925'
     },
 
     // If fields are custom to each user (like spreadsheet columns), `outputFields` can create human labels

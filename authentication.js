@@ -39,7 +39,7 @@ module.exports = {
     fields: [
       { key: 'gatewayUrl', label: 'REST Gateway URL', required: true, helpText: 'Specify the domain of the REST gateway (eg https://aws-us-east-1.restgw.cloud.memphis.dev/)'},
       { key: 'username', label: 'Client Type Username', required: true },
-      { key: 'accountId', label: 'Account ID', required: true, type: 'integer'},
+      { key: 'accountId', label: 'Account ID', required: false, type: 'integer',  helpText: 'Supply Account ID if your deployment has one'},
       { key: 'password', label: 'Password', required: true, type: 'password' },
     ],
 

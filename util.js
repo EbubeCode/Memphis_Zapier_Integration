@@ -43,8 +43,19 @@ const sanitizeUrl = (url) => {
     return url.slice(-1) === '/' ? url.substring(0, url.length-1) : url;
 }
 
+
+const uuidv4 = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+    .replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 module.exports = {
     authenticate,
     refreshToken,
-    sanitizeUrl
+    sanitizeUrl,
+    uuidv4
 };

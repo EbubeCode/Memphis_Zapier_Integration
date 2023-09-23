@@ -1,4 +1,4 @@
-const { refreshToken, sanitizeUrl } = require('../util');
+const { refreshToken, sanitizeUrl, uuidv4} = require('../util');
 
 // triggers on a new message with a certain tag
 const perform = async (z, bundle) => {
@@ -18,11 +18,10 @@ const perform = async (z, bundle) => {
     body
   });
   // this should return an array of objects
-  let id = 0;
   return response.data.map((message) => {
     return {
       ...message,
-      id: ++id
+      id: uuidv4()
     }
   });
 };
@@ -57,7 +56,8 @@ module.exports = {
       headers: {
         "Content-Type": "application/json",
         "Host": "localhost:4444"
-      }
+      },
+      id: '486ca60b-8c2c-411e-b54e-67c74a4fb925'
     },
 
     // If fields are custom to each user (like spreadsheet columns), `outputFields` can create human labels
