@@ -9,25 +9,29 @@ describe('custom auth', () => {
   it('passes authentication and returns json', async () => {
     const bundle = {
       authData: {
-        apiKey: 'secret',
+        gatewayUrl: 'http://localhost:4444',
+        username: 'ebube',
+        password: '2242H-@C3-1%@xF@@W'
       },
     };
 
     const response = await appTester(App.authentication.test, bundle);
-    expect(response.data).toHaveProperty('username');
+    expect(response).toHaveProperty('hostUser');
   });
 
   it('fails on bad auth', async () => {
     const bundle = {
       authData: {
-        apiKey: 'bad',
+        gatewayUrl: 'http://localhost:4444',
+        username: 'ebube',
+        password: 'f-@C3-1%@xF@@W'
       },
     };
 
     try {
       await appTester(App.authentication.test, bundle);
     } catch (error) {
-      expect(error.message).toContain('The API Key you supplied is incorrect');
+      expect(error.message).toContain('Invalid credentials');
       return;
     }
     throw new Error('appTester should have thrown');
