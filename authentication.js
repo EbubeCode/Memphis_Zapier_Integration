@@ -3,7 +3,7 @@
 const { authenticate } = require('./util');
 const test = async (z, bundle) => {
   let data = await authenticate(z, bundle);
-  data.hostUser = `${bundle.authData.username}@{bundle.authData.gatewayUrl}`;
+  data.hostUser = `${bundle.authData.username}@${bundle.authData.gatewayUrl}`;
   return data;
 }
 
@@ -39,7 +39,7 @@ module.exports = {
     fields: [
       { key: 'gatewayUrl', label: 'REST Gateway URL', required: true, helpText: 'Specify the domain of the REST gateway (eg https://aws-us-east-1.restgw.cloud.memphis.dev/)'},
       { key: 'username', label: 'Client Type Username', required: true },
-      { key: 'accountId', label: 'Account ID', required: true },
+      { key: 'accountId', label: 'Account ID', required: true, type: 'integer'},
       { key: 'password', label: 'Password', required: true, type: 'password' },
     ],
 

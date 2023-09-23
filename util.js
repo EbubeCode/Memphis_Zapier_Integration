@@ -3,7 +3,7 @@ const authenticate =  async (z, bundle) => {
     const authBody = {
         username: `${bundle.authData.username}`,
         password: `${bundle.authData.password}`,
-        account_id: `${bundle.authData.accountId}`,
+        account_id: parseInt(bundle.authData.accountId),
         token_expiry_in_minutes: 6000000,
         refresh_token_expiry_in_minutes: 100000
     }
