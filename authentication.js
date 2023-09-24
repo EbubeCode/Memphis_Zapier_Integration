@@ -50,7 +50,7 @@ module.exports = {
       {
         key: 'gatewayUrl', label: 'Memphis REST Gateway URL',
         required: true,
-        helpText: 'Specify the domain of the REST gateway (eg., https://[cloud-provider].[region].restgw.cloud.memphis.dev). Learn more [here](https://docs.memphis.dev/memphis/integrations-center/other-platforms/zapier).'
+        helpText: 'Specify the domain of your Memphis.dev REST gateway (For example https://[cloud-provider].[region].restgw.cloud.memphis.dev). Learn more [here](https://docs.memphis.dev/memphis/integrations-center/other-platforms/zapier).'
       },
       { key: 'username', label: 'Client-type Username', required: true },
       { key: 'password', label: 'Client-type Password', required: true, type: 'password' },
