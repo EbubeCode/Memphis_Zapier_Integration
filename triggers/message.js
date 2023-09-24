@@ -9,7 +9,8 @@ const perform = async (z, bundle) => {
   }
   const body = {
     'consumer_name': bundle.inputData.consumer || bundle.authData.username,
-    'consumer_group': bundle.inputData.consumerGroup || 'zapier'
+    'consumer_group': bundle.inputData.consumerGroup || 'zapier',
+    'batch_size': parseInt(bundle.inputData.batchSize || '10')
   }
   const response = await z.request({
     method: 'POST',
@@ -34,7 +35,7 @@ module.exports = {
 
   display: {
     label: 'New Message',
-    description: 'Triggers when a new message published to station.'
+    description: 'Triggers when a new message is published to a station.'
   },
 
   operation: {
@@ -44,8 +45,25 @@ module.exports = {
     // Zapier will pass them in as `bundle.inputData` later. They're optional.
     inputFields: [
       {key: 'station', label: 'Station', required: true},
-      {key: 'consumer', label: 'Consumer Name', required: false},
-      {key: 'consumerGroup', label: 'Consumer Group Name', required: false},
+      {
+        key: 'consumer',
+        label: 'Consumer Name',
+        required: false,
+        helpText: 'A consumer is the client that reads/consumes messages from a Memphis station.'
+      },
+      {
+        key: 'consumerGroup',
+        label: 'Consumer Group Name',
+        required: false,
+        helpText: 'A consumer group is a collection of multiple consumers. Read more [here](https://docs.memphis.dev/memphis/memphis-broker/concepts/consumer-groups).'
+      },
+      {
+        key: 'batchSize',
+        label: 'Batch size',
+        required: false,
+        type: 'integer',
+        helpText: 'Amount of messages this zap can fetch at once.'
+      },
     ],
 
     // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example

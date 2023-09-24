@@ -38,8 +38,8 @@ module.exports = {
   noun: 'Message',
 
   display: {
-    label: 'Create Message',
-    description: 'Creates a new message, probably with input from previous steps.'
+    label: 'Produce a Message',
+    description: 'Produces a new message to the specified station, probably with input from previous steps.'
   },
 
   operation: {

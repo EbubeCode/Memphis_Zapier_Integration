@@ -1,10 +1,20 @@
 'use strict';
 
 const { authenticate } = require('./util');
+
 const test = async (z, bundle) => {
   let data = await authenticate(z, bundle);
-  data.hostUser = `${bundle.authData.username}@${bundle.authData.gatewayUrl}`;
+  data.hostUser = `${bundle.authData.username}@${getShortUrl(bundle.authData.gatewayUrl)}`;
   return data;
+}
+
+const getShortUrl = (url) => {
+    const regionRegex = /https?:\/\/([^\/:]+).*$/;
+    const match = url.match(regionRegex);
+    if (match && match[1]) {
+      return match[1].split(':')[0].split('.')[0];
+    }
+    return '';
 }
 
 // This function runs after every outbound request. You can use it to check for
@@ -37,10 +47,20 @@ module.exports = {
     type: 'custom',
 
     fields: [
-      { key: 'gatewayUrl', label: 'REST Gateway URL', required: true, helpText: 'Specify the domain of the REST gateway (eg https://aws-us-east-1.restgw.cloud.memphis.dev/)'},
-      { key: 'username', label: 'Client Type Username', required: true },
-      { key: 'accountId', label: 'Account ID', required: false, type: 'integer',  helpText: 'Supply Account ID if your deployment has one'},
-      { key: 'password', label: 'Password', required: true, type: 'password' },
+      {
+        key: 'gatewayUrl', label: 'Memphis REST Gateway URL',
+        required: true,
+        helpText: 'Specify the domain of the REST gateway (eg., https://[cloud-provider].[region].restgw.cloud.memphis.dev). Learn more [here](https://docs.memphis.dev/memphis/integrations-center/other-platforms/zapier).'
+      },
+      { key: 'username', label: 'Client-type Username', required: true },
+      { key: 'password', label: 'Client-type Password', required: true, type: 'password' },
+      {
+        key: 'accountId',
+        label: 'Account ID',
+        required: false,
+        type: 'integer',
+        helpText: 'In case you are a Memphis.dev Cloud user, please specify your “Account ID.” (e.g., 212111333). Learn more [here](https://docs.memphis.dev/memphis/integrations-center/other-platforms/zapier).'
+      },
     ],
 
     test,
