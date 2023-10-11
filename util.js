@@ -4,8 +4,8 @@ const authenticate =  async (z, bundle) => {
         username: `${bundle.authData.username}`,
         password: `${bundle.authData.password}`,
         account_id: parseInt(bundle.authData.accountId),
-        token_expiry_in_minutes: 6000000,
-        refresh_token_expiry_in_minutes: 100000
+        token_expiry_in_minutes: 5,
+        refresh_token_expiry_in_minutes: 5
     }
     const requestOptions = {
         url: `${sanitizeUrl(bundle.authData.gatewayUrl)}/auth/authenticate`,
